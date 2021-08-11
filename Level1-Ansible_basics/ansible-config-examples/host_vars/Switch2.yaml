@@ -1,0 +1,5 @@
+---
+ansible_host: 10.100.50.147
+ansible_network_os: ios
+
+...

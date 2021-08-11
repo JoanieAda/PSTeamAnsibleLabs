@@ -1,0 +1,17 @@
+---
+- name: gather and print IOS/NXOS facts
+  hosts: all
+  tasks:
+    - name: gather IOS facts
+      cisco.ios.ios_facts:
+        gather_subset: all
+      register: ios_facts
+      when: ansible_network_os == 'ios'
+
+    - name: show IOS facts
+      debug:
+        var: ios_facts
+
+    
+
+...

@@ -1,0 +1,23 @@
+---
+all:
+  children:
+    campus:
+      children:
+        routers:
+          hosts:
+            R1:
+            R2:
+        switches:
+          hosts:
+            Switch1:
+            Switch2:
+  one:
+    hosts:
+      R1:
+      Switch1:
+  two:
+    hosts:
+      R2:
+      Switch2:
+
+...
