@@ -1,11 +1,11 @@
 {% for int in l3_interfaces %}
 
 interface {{ int.name }}
- description {{ int.description }}
- ip address {{ int.ip | ipaddr('address') }} {{ int.ip | ipaddr('netmask') }}
 {%  if int.dot1q is defined %}
  encapsulation dot1Q {{ int.dot1q }}
 {%  endif %}
+ description {{ int.description }}
+ ip address {{ int.ip | ipaddr('address') }} {{ int.ip | ipaddr('netmask') }}
 
 {% endfor %}
 
