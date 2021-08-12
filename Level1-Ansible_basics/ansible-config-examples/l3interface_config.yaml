@@ -1,0 +1,10 @@
+---
+- name: Configure Layer 3 interfaces
+  hosts: all
+
+  tasks:
+    - name: Layer 3 interface configuration from template       
+      ios_config:
+        src: templates/l3_interfaces.j2
+
+...

@@ -1,0 +1,6 @@
+---
+ntp:
+  - server: 100.100.100.100
+    int: Loopback0
+
+...

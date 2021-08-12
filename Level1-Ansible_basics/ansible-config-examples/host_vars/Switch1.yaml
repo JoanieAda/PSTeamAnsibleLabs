@@ -2,4 +2,34 @@
 ansible_host: 10.100.50.146
 ansible_network_os: ios
 
+vlans:
+  - vid: 11
+    name: Switch1-R1
+  - vid: 12
+    name: Switch1-R2
+
+l3_interfaces:
+  - name: Loopback0
+    description: Loopback interface
+    ip: 10.10.10.10/32
+  - name: Vlan11
+    description: R1 to Switch1
+    ip: 10.1.10.2/24
+  - name: Vlan12
+    description: R2 to Switch1
+    ip: 10.2.10.2/24
+
+l2_interfaces:
+  - name: GigabitEthernet0/0
+    mode: trunk
+    vlans: 10,20,30
+    native: 99
+  - name: GigabitEthernet0/1
+    mode: trunk
+    vlans: 11
+    native: 99
+  - name: GigabitEthernet0/2
+    mode: access
+    vlans: 12
+
 ...

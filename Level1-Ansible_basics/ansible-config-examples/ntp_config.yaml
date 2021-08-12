@@ -1,0 +1,13 @@
+---
+- name: NTP configuration based on groups one/two
+  hosts: all
+
+  tasks:
+    - name: Configure ntp server
+      ios_ntp:
+        server: "{{ item.server }}"
+        source_int: "{{ item.int }}"
+      with_items: "{{ ntp }}"
+      when: ntp is defined
+
+...

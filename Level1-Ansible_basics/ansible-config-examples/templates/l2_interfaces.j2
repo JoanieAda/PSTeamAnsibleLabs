@@ -1,0 +1,15 @@
+{% for int in l2_interfaces %}
+
+interface {{ int.name }}
+{%  if 'trunk' in int.mode %}
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan {{ int.native }}
+ switchport trunk allowed vlan {{ int.vlans }} 
+ switchport mode trunk
+{%  elif 'access' in int.mode %}
+ switchport access vlan {{ int.vlans }}
+ switchport mode access
+{%  endif %}
+
+{% endfor %}
+
