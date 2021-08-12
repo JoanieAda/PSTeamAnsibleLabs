@@ -1,0 +1,13 @@
+---
+- name: Configure OSPF
+  hosts: campus
+
+  tasks:
+    - name: OSPF interface configuration from manual entry       
+      ios_config:
+        lines:
+        - network 0.0.0.0 255.255.255.255 area 0
+        parents: router ospf 1
+
+
+...

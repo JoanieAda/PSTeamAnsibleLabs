@@ -1,0 +1,12 @@
+---
+global_vlans:
+  - vid: 10
+    name: DATA
+  - vid: 20
+    name: VOICE
+  - vid: 30
+    name: GUEST
+  - vid: 99
+    name: NATIVE
+
+...

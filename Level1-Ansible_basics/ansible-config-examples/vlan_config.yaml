@@ -1,0 +1,14 @@
+---
+- name: Vlan configuration on switches
+  hosts: switches
+
+  tasks:
+    - name: Configure vlans
+      ios_vlans:
+        config:
+        - name: "{{ item.name }}"
+          vlan_id: "{{ item.vid }}"
+      with_items: "{{ vlans + global_vlans }}"
+      when: vlans is defined
+
+...

@@ -1,0 +1,19 @@
+---
+- name: No shut interfaces that are shutdown
+  hosts: all
+
+  tasks:
+    - name: gather Interfaces facts
+      ios_facts:
+        gather_subset: interfaces
+      register: ios_facts
+
+    - name: No shut interfaces
+      ios_config:
+        lines:
+        - no shutdown
+        parents: interface {{ item.key }}
+      with_dict: "{{ ios_facts.ansible_facts.ansible_net_interfaces }}"
+      when: item.value.operstatus == "administratively down" 
+
+...

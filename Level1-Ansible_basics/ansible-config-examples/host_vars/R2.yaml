@@ -2,4 +2,18 @@
 ansible_host: 10.100.50.144
 ansible_network_os: ios
 
+l3_interfaces:
+  - name: Loopback0
+    description: Loopback interface
+    ip: 2.2.2.2/32
+  - name: GigabitEthernet0/0
+    description: R1 to R2
+    ip: 10.1.2.2/24
+  - name: GigabitEthernet0/1
+    description: R2 to Switch2
+    ip: 10.2.20.1/24
+  - name: GigabitEthernet0/2
+    description: R2 to Switch1
+    ip: 10.2.10.1/24
+
 ...

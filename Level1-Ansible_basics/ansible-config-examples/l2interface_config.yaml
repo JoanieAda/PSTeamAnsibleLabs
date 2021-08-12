@@ -1,0 +1,10 @@
+---
+- name: Configure Layer 2 interfaces
+  hosts: switches
+
+  tasks:
+    - name: Layer 2 interface configuration from template       
+      ios_config:
+        src: templates/l2_interfaces.j2
+
+...
