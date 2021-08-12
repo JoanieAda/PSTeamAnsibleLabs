@@ -631,9 +631,9 @@ nodes:
     configuration: |-
       Building configuration...
 
-      Current configuration : 3189 bytes
+      Current configuration : 3225 bytes
       !
-      ! Last configuration change at 11:59:30 UTC Tue Aug 10 2021
+      ! Last configuration change at 11:00:07 UTC Thu Aug 12 2021 by admin
       !
       version 15.2
       service timestamps debug datetime msec
@@ -672,6 +672,7 @@ nodes:
       !
       !
       !
+      vtp mode transparent
       !
       !
       !
@@ -682,7 +683,7 @@ nodes:
       !
       !
       !
-      spanning-tree mode pvst
+      spanning-tree mode rapid-pvst
       spanning-tree extend system-id
       !
       !
@@ -797,9 +798,9 @@ nodes:
     configuration: |-
       Building configuration...
 
-      Current configuration : 3189 bytes
+      Current configuration : 3225 bytes
       !
-      ! Last configuration change at 11:59:05 UTC Tue Aug 10 2021
+      ! Last configuration change at 11:00:10 UTC Thu Aug 12 2021 by admin
       !
       version 15.2
       service timestamps debug datetime msec
@@ -838,6 +839,7 @@ nodes:
       !
       !
       !
+      vtp mode transparent
       !
       !
       !
@@ -848,7 +850,7 @@ nodes:
       !
       !
       !
-      spanning-tree mode pvst
+      spanning-tree mode rapid-pvst
       spanning-tree extend system-id
       !
       !

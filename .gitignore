@@ -1,0 +1,3 @@
+#Ignore visio files in diagrams
+*/diagrams/*.vsdx
+*/diagrams/*.~vsdx  
