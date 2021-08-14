@@ -1,0 +1,12 @@
+---
+- example: GigabitEthernet0/0         10.1.2.1        YES manual up                    up
+  getval: '^(?P<int_name>\S+)\s+(?P<int_ipaddress>\d+\.\d+\.\d+\.\d+).*(?P<int_status>up|administratively down|down).*(?P<int_proto>up|down)'
+  result:
+    "{{ int_name }}":
+      val_intf: "{{ int_name }}"
+      val_ip: "{{ int_ipaddress }}"
+      val_status: "{{ int_status }}"
+      val_proto: "{{ int_proto }}"
+
+...
+

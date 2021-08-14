@@ -1,0 +1,9 @@
+---
+- example: Gi0/0       10,20,30
+  getval: '^(?P<interface>\S+)\s+(?P<vlans>\d+.*)'
+  result:
+    "{{ interface }}": 
+      vlan_list: '"{{ vlans }}"'
+
+...
+

@@ -1,0 +1,29 @@
+---
+- name: Reachability test
+  hosts: all
+
+  tasks:
+    - name: Ping Loopbacks
+      ios_ping:
+        dest: "{{ item.value }}"
+        source: Loopback0
+      with_dict: "{{ ip }}"
+      when: item.key != inventory_hostname
+      register: ping_result
+
+    - name: Display ping results
+      debug:
+        msg: "Packet Loss: {{ item.packet_loss }}"
+      with_items: "{{ ping_result.results }}"
+      when: item.item.key != inventory_hostname
+      loop_control:
+        label: "{{ item.item.value }}"
+
+  vars:
+    ip:
+      R1: 1.1.1.1
+      R2: 2.2.2.2
+      Switch1: 10.10.10.10
+      Switch2: 20.20.20.20
+
+...

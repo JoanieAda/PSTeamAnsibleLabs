@@ -1,0 +1,14 @@
+---
+vars:
+  val_ip_address:
+    key: "{{ item.int_name }}"
+    values:
+      val_intf: "{{ item.int_name }}"     
+      val_ip: "{{ item.int_ipaddress }}"
+
+keys:
+  val_ip_address:
+    value: "{{ val_ip_address }}"
+    items: '^(?P<int_name>\S+)\s+(?P<int_ipaddress>\d+\.\d+\.\d+\.\d+).*(?P<int_status>up|administratively down|down).*(?P<int_proto>up|down)'
+
+...

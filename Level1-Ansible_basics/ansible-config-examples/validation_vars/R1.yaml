@@ -1,0 +1,23 @@
+---
+interface_list:
+  - val_intf: "GigabitEthernet0/0"
+    val_ip: "10.1.2.1"
+  - val_intf: "GigabitEthernet0/1.11"
+    val_ip: "10.1.10.1"
+  - val_intf: "GigabitEthernet0/2.21"
+    val_ip: "10.1.20.1"
+  - val_intf: "Loopback0"
+    val_ip: "1.1.1.1"
+
+loopback_routes:
+  - lo0_ip: "2.2.2.2"
+    nexthop: "10.1.2.2"
+  - lo0_ip: "10.10.10.10"
+    nexthop: "10.1.10.2"
+  - lo0_ip: "20.20.20.20"
+    nexthop: "10.1.20.2"
+
+ntp_list:
+  - ntpserver: "100.100.100.100"
+
+...

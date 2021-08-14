@@ -1,0 +1,29 @@
+---
+interface_list:
+  - val_intf: "Vlan21"
+    val_ip: "10.1.20.2"
+  - val_intf: "Vlan22"
+    val_ip: "10.2.20.2"
+  - val_intf: "Loopback0"
+    val_ip: "20.20.20.20"
+
+loopback_routes:
+  - lo0_ip: "1.1.1.1"
+    nexthop: "10.1.20.1"
+  - lo0_ip: "2.2.2.2"
+    nexthop: "10.2.20.1"
+  - lo0_ip: "10.10.10.10"
+    nexthop: "10.1.20.1"
+  - lo0_ip: "10.10.10.10"
+    nexthop: "10.2.20.1"
+
+trunks:
+  - val_trunk_intf: "Gi0/0"
+    val_trunk_vlans: "10,20,30"
+  - val_trunk_intf: "Gi0/2"
+    val_trunk_vlans: "21"
+
+ntp_list:
+  - ntpserver: "200.200.200.200"
+
+...

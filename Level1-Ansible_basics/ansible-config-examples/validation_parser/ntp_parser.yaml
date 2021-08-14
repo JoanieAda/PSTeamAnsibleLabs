@@ -1,0 +1,8 @@
+---
+- example: ntp server 200.200.200.200
+  getval: '^ntp\sserver\s(?P<ntpserver>\d+.\d+.\d+.\d+)'
+  result:
+    "{{ ntpserver }}": 
+      server: "{{ ntpserver }}"  
+...
+

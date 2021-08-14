@@ -1,0 +1,83 @@
+---
+#uses ntc_templates, use the following to install: pip install ntc-templates
+- name: Configuration Validation
+  hosts: all
+
+  tasks:
+    - name: Loading validation variables
+      stat:
+        path: "validation_vars/{{ inventory_hostname }}.yaml"
+      register: validation_yaml
+    - include_vars:
+        file: "validation_vars/{{ inventory_hostname }}.yaml"
+      when: validation_yaml.stat.exists == True
+  
+    - name: Fetch interface information
+      ansible.utils.cli_parse:
+        command: show ip interface brief | ex 0/3
+        parser:
+          name: ansible.netcommon.ntc_templates
+        set_fact: "int_list"
+
+    - name: Fetch OSPF information
+      ansible.utils.cli_parse:
+        command: show ip route ospf
+        parser:
+          name: ansible.netcommon.ntc_templates
+        set_fact: "ospf_routes"
+
+    - name: Fetch Trunk information
+      ansible.utils.cli_parse:
+        command: show interface trunk | be pruned
+        parser:
+          name: ansible.netcommon.native
+          template_path: "validation_parser/trunk_parser.yaml"
+        set_fact: "trunk_dict"
+      when: "'switches' in group_names"
+
+    - name: Convert Trunk Dict to List
+      set_fact:
+        trunk_vlans: "{{ trunk_vlans|default([]) + [ {'trunk_intf': item.key, 'vlan_list': item.value.vlan_list} ] }}"
+      with_dict: "{{ ansible_facts.trunk_dict }}"
+      when: "'switches' in group_names"
+
+    - name: Fetch NTP information
+      ansible.utils.cli_parse:
+        command: show ntp config
+        parser:
+          name: ansible.netcommon.native
+          template_path: "validation_parser/ntp_parser.yaml"
+        set_fact: "ntp_dict"
+
+    - name: Convert NTP Dict to List
+      set_fact:
+        ntp_server: "{{ ntp_server|default([]) + [ {'ntpserver': item.key} ] }}"
+      with_dict: "{{ ansible_facts.ntp_dict }}"
+
+    - name: Assert configuration
+      ansible.builtin.assert:
+        that: 
+          - "int_list | selectattr('intf', 'equalto', item.val_intf) | selectattr('ipaddr', 'equalto', item.val_ip) | selectattr('status', 'equalto', 'up') | selectattr('proto', 'equalto', 'up')"
+      loop: "{{ interface_list }}"
+
+    - name: Assert OSPF routes
+      ansible.builtin.assert:
+        that:
+          - "ospf_routes | selectattr('network', 'equalto', item.lo0_ip) | selectattr('nexthop_ip', 'equalto', item.nexthop)"
+      loop: "{{ loopback_routes }}"
+
+    - name: Assert Trunk interfaces
+      ansible.builtin.assert:
+        that:
+          - "trunk_vlans | selectattr('trunk_intf', 'equalto', item.val_trunk_intf) | selectattr('vlan_list', 'equalto', item.val_trunk_vlans)"
+      loop: "{{ trunks }}"
+      when: "'switches' in group_names"
+
+    - name: Assert NTP server
+      ansible.builtin.assert:
+        that:
+                #- "ntp_server | selectattr('ntpserver', 'equalto', item.ntpserver)"
+          - "ntp_server | map(attribute='ntpserver') | first == item.ntpserver"
+      loop: "{{ ntp_list }}"
+
+...
