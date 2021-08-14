@@ -54,7 +54,7 @@
         ntp_server: "{{ ntp_server|default([]) + [ {'ntpserver': item.key} ] }}"
       with_dict: "{{ ansible_facts.ntp_dict }}"
 
-    - name: Assert configuration
+    - name: Assert Interface IP/Status
       ansible.builtin.assert:
         that: 
           - "int_list | selectattr('intf', 'equalto', item.val_intf) | selectattr('ipaddr', 'equalto', item.val_ip) | selectattr('status', 'equalto', 'up') | selectattr('proto', 'equalto', 'up')"
