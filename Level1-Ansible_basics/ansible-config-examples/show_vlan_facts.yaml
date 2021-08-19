@@ -12,7 +12,7 @@
      register: vlan_interfaces
 
    - name: Display Vlan Interfaces
-     ansible.builtin.debug:
+     debug:
        var: vlan_interfaces.ansible_facts.ansible_network_resources
 
 ...

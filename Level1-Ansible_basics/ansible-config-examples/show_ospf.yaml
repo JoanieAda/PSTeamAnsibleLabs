@@ -6,14 +6,15 @@
    - name: Show OSPF details
      ios_command:
        commands:
-         - command: show ip ospf neighbors
-         - command: show ip route ospf
+       - show ip ospf neighbor
+       - show ip route ospf
      register: show_ospf
 
-   - debug: msg="{{ show_ospf.stdout_lines }}"
+   - debug: 
+       msg: "{{ show_ospf.stdout_lines }}"
 
    - name: Save outputs from previous task in 'backups' directory
      copy:
        content: "{{show_ospf.stdout[0]+show_ospf.stdout[1]}}"
-       dest: "./backups/{{inventory_hostname}}-output.txt"
+       dest: "./backups/{{inventory_hostname}}-ospf-output.txt"
 ...
