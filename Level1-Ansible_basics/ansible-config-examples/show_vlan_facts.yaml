@@ -1,0 +1,18 @@
+---
+# Playbook to collect and show some facts
+
+- name: show vlan info
+  hosts: switches
+  
+  tasks:
+   - name: Gather vlan interface information
+     ios_facts:
+       gather_subset: interfaces
+       gather_network_resources: vlans
+     register: vlan_interfaces
+
+   - name: Display Vlan Interfaces
+     ansible.builtin.debug:
+       var: vlan_interfaces.ansible_facts.ansible_network_resources
+
+...

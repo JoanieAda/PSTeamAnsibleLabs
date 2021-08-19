@@ -1,0 +1,19 @@
+---
+- name: show ntp info
+  hosts: routers
+  
+  tasks:
+   - name: Show ntp details
+     ios_command:
+       commands:
+         - command: show ntp status
+         - command: show ntp associations
+     register: show_ntp
+
+   - debug: msg="{{ show_ntp.stdout_lines }}"
+
+   - name: Save outputs from previous task in 'backups' directory
+     copy:
+       content: "{{show_ntp.stdout[0]+show_ntp.stdout[1]}}"
+       dest: "./backups/{{inventory_hostname}}-output.txt"
+...
