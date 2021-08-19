@@ -1,3 +1,9 @@
 #Ignore visio files in diagrams
 */diagrams/*.vsdx
 */diagrams/*.~vsdx  
+
+#Ignore docx files in lab guide 
+*/Lab\ guide/*.docx
+
+#Ignore lab guide (temporary)
+*/Lab\ guide/*

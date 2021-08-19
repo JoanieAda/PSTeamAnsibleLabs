@@ -1,0 +1,17 @@
+---
+- name: show l3 interface info
+  hosts: campus
+  
+  tasks:
+   - name: Gather some facts
+     ios_facts:
+     when: ansible_network_os == 'ios'
+     register: output
+
+   - name: show interfaces
+     ansible.builtin.debug:
+       msg: "{{ item }}"
+     loop: "{{ output.ansible_facts.ansible_net_interfaces|dict2items }}"
+     when: item.value.operstatus == "up"
+
+...
