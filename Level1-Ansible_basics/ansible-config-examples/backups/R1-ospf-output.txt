@@ -1,7 +1,7 @@
 Neighbor ID     Pri   State           Dead Time   Address         Interface
-20.20.20.20       1   FULL/DR         00:00:35    10.1.20.2       GigabitEthernet0/2.21
-10.10.10.10       1   FULL/DR         00:00:31    10.1.10.2       GigabitEthernet0/1.11
-2.2.2.2           1   FULL/DR         00:00:38    10.1.2.2        GigabitEthernet0/0Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
+20.20.20.20       1   FULL/DR         00:00:37    10.1.20.2       GigabitEthernet0/2.21
+10.10.10.10       1   FULL/DR         00:00:33    10.1.10.2       GigabitEthernet0/1.11
+2.2.2.2           1   FULL/DR         00:00:37    10.1.2.2        GigabitEthernet0/0Codes: L - local, C - connected, S - static, R - RIP, M - mobile, B - BGP
        D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area 
        N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2
        E1 - OSPF external type 1, E2 - OSPF external type 2
