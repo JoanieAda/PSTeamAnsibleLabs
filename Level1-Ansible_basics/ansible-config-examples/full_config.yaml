@@ -1,0 +1,9 @@
+---
+- import_playbook: vlan_config.yaml
+- import_playbook: l2interface_config.yaml
+- import_playbook: l3interface_config.yaml
+- import_playbook: ospf_config.yaml
+- import_playbook: ntp_config.yaml
+- import_playbook: noshut_config.yaml  
+
+...
