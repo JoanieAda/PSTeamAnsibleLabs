@@ -11,7 +11,7 @@
    - name: show interfaces
      debug:
        msg: "{{ item }}"
-     loop: "{{ output.ansible_facts.ansible_net_interfaces|dict2items }}"
+     with_dict: "{{ output.ansible_facts.ansible_net_interfaces }}"
      when: item.value.operstatus == "up"
 
 ...
